@@ -91,7 +91,7 @@ async function searchPhotos(event) {
 }
 const onLoadMore = async () => {
   pixabay.incrementPage();
-  if (data.hits.length < 40) {
+  if (hits.length < totalHits) {
     refs.loadMoreBtn.classList.add('is-hidden');
     Notify.info("We're sorry, but you've reached the end of search results.");
   }

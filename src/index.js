@@ -91,14 +91,10 @@ async function searchPhotos(event) {
 }
 const onLoadMore = async () => {
   pixabay.incrementPage();
-  if (PixabayApi.page > data.totalHits / PixabayApi.per_page) {
-        refs.loadMoreBtn.classList.add('is-hidden');
-        Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
-    }
-  // if (!pixabay.isShowLoadMore) {
-  //   refs.loadMoreBtn.classList.add('is-hidden');
-  //   Notify.info("We're sorry, but you've reached the end of search results.");
-  // }
+  if (data.hits.length < 40) {
+    refs.loadMoreBtn.classList.add('is-hidden');
+    Notify.info("We're sorry, but you've reached the end of search results.");
+  }
   try {
     const { hits } = await pixabay.getPhotos();
     const markup = createMarkup(hits);
